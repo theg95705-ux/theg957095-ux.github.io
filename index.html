@@ -1,8 +1,8 @@
-```html
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -21,8 +21,6 @@
     --border: #272a31;
     --text: #f5f5f5;
     --muted: #8d929c;
-    --accent: #ffffff;
-    --accentText: #08090b;
 }
 
 body {
@@ -34,8 +32,7 @@ body {
     overflow: hidden;
 }
 
-
-/* ================= HEADER ================= */
+/* HEADER */
 
 header {
     height: 64px;
@@ -137,8 +134,7 @@ nav button.active {
     font-size: 12px;
 }
 
-
-/* ================= LAYOUT ================= */
+/* LAYOUT */
 
 .app {
     height: calc(100vh - 64px);
@@ -148,8 +144,7 @@ nav button.active {
     grid-template-columns: 370px 1fr;
 }
 
-
-/* ================= SIDEBAR ================= */
+/* SIDEBAR */
 
 .sidebar {
     border-right: 1px solid var(--border);
@@ -186,8 +181,7 @@ nav button.active {
     display: block;
 }
 
-
-/* ================= MODE ================= */
+/* MODE */
 
 .modeButtons {
     display: grid;
@@ -223,8 +217,7 @@ nav button.active {
     border-color: #42464e;
 }
 
-
-/* ================= PROMPT ================= */
+/* PROMPT */
 
 textarea {
     width: 100%;
@@ -256,8 +249,7 @@ textarea:focus {
     border-color: #555a63;
 }
 
-
-/* ================= QUICK PROMPTS ================= */
+/* QUICK */
 
 .quick {
     display: flex;
@@ -291,8 +283,7 @@ textarea:focus {
     background: #1d2026;
 }
 
-
-/* ================= IMAGE UPLOAD ================= */
+/* IMAGE */
 
 .uploadArea {
     width: 100%;
@@ -411,8 +402,7 @@ textarea:focus {
     color: white;
 }
 
-
-/* ================= SETTINGS ================= */
+/* SETTINGS */
 
 .settings {
     margin-top: 23px;
@@ -450,8 +440,7 @@ select {
     padding: 6px 8px;
 }
 
-
-/* ================= TOGGLE ================= */
+/* TOGGLE */
 
 .switch {
     position: relative;
@@ -504,8 +493,7 @@ input:checked + .slider:before {
     background: #111;
 }
 
-
-/* ================= GENERATE ================= */
+/* GENERATE */
 
 .generate {
     width: 100%;
@@ -551,10 +539,11 @@ input:checked + .slider:before {
     font-size: 11px;
 
     color: #888e98;
+
+    line-height: 1.4;
 }
 
-
-/* ================= VIEWER ================= */
+/* VIEWER */
 
 .viewerArea {
     position: relative;
@@ -622,8 +611,7 @@ input:checked + .slider:before {
     margin: 0;
 }
 
-
-/* ================= VIEWER CONTROLS ================= */
+/* CONTROLS */
 
 .viewerControls {
     position: absolute;
@@ -662,8 +650,7 @@ input:checked + .slider:before {
     cursor: not-allowed;
 }
 
-
-/* ================= LOADING ================= */
+/* LOADING */
 
 .loading {
     position: absolute;
@@ -676,6 +663,8 @@ input:checked + .slider:before {
     text-align: center;
 
     display: none;
+
+    z-index: 10;
 }
 
 .spinner {
@@ -701,8 +690,7 @@ input:checked + .slider:before {
 
 }
 
-
-/* ================= HISTORY ================= */
+/* HISTORY */
 
 .historyPanel {
     display: none;
@@ -716,6 +704,8 @@ input:checked + .slider:before {
     padding: 40px;
 
     overflow-y: auto;
+
+    z-index: 20;
 }
 
 .historyPanel h2 {
@@ -779,8 +769,7 @@ input:checked + .slider:before {
     text-overflow: ellipsis;
 }
 
-
-/* ================= RESPONSIVE ================= */
+/* RESPONSIVE */
 
 @media(max-width: 800px) {
 
@@ -811,13 +800,10 @@ input:checked + .slider:before {
 }
 
 </style>
+
 </head>
 
-
 <body>
-
-
-<!-- ================= HEADER ================= -->
 
 <header>
 
@@ -830,7 +816,6 @@ input:checked + .slider:before {
         Forge3D
 
     </div>
-
 
     <nav>
 
@@ -851,11 +836,10 @@ input:checked + .slider:before {
 
     </nav>
 
-
     <div class="headerRight">
 
         <div class="credit">
-            Free Preview
+            Tripo AI
         </div>
 
         <div class="avatar">
@@ -867,11 +851,8 @@ input:checked + .slider:before {
 </header>
 
 
-
 <div class="app">
 
-
-<!-- ================= SIDEBAR ================= -->
 
 <section class="sidebar">
 
@@ -883,8 +864,6 @@ input:checked + .slider:before {
         Turn your ideas into interactive 3D models.
     </div>
 
-
-    <!-- MODE -->
 
     <span class="label">
         Generation mode
@@ -901,7 +880,6 @@ input:checked + .slider:before {
             ✨ Text to 3D
         </button>
 
-
         <button
             class="modeButton"
             id="imageMode"
@@ -913,21 +891,16 @@ input:checked + .slider:before {
     </div>
 
 
-
-    <!-- ================= TEXT MODE ================= -->
-
     <div id="textInput">
 
         <span class="label">
             Describe your model
         </span>
 
-
         <textarea
             id="prompt"
             placeholder="Example: A military checkpoint with concrete barriers, sandbags, a guard tower and a small metal building..."
         ></textarea>
-
 
         <div class="quick">
 
@@ -937,20 +910,17 @@ input:checked + .slider:before {
                 🪖 Military
             </button>
 
-
             <button
                 onclick="setPrompt('A rusty industrial warehouse with metal walls and large doors')"
             >
                 🏭 Industrial
             </button>
 
-
             <button
                 onclick="setPrompt('A small abandoned gas station with weathered signs')"
             >
                 🏚 Building
             </button>
-
 
             <button
                 onclick="setPrompt('A wooden watch tower with stairs and a small roof')"
@@ -962,9 +932,6 @@ input:checked + .slider:before {
 
     </div>
 
-
-
-    <!-- ================= IMAGE MODE ================= -->
 
     <div
         id="imageInput"
@@ -978,7 +945,6 @@ input:checked + .slider:before {
             accept="image/png,image/jpeg,image/webp"
             hidden
         >
-
 
         <label
             class="upload"
@@ -1011,7 +977,6 @@ input:checked + .slider:before {
                 alt="Image preview"
             >
 
-
             <div class="imageInfo">
 
                 <div id="imageName">
@@ -1021,7 +986,6 @@ input:checked + .slider:before {
                 <div id="imageSize"></div>
 
             </div>
-
 
             <button
                 type="button"
@@ -1036,11 +1000,7 @@ input:checked + .slider:before {
     </div>
 
 
-
-    <!-- ================= SETTINGS ================= -->
-
     <div class="settings">
-
 
         <div class="setting">
 
@@ -1127,12 +1087,8 @@ input:checked + .slider:before {
 
         </div>
 
-
     </div>
 
-
-
-    <!-- ================= GENERATE ================= -->
 
     <button
         class="generate"
@@ -1156,15 +1112,10 @@ input:checked + .slider:before {
         id="status"
     ></div>
 
-
 </section>
 
 
-
-<!-- ================= VIEWER ================= -->
-
 <section class="viewerArea">
-
 
     <div id="viewer"></div>
 
@@ -1189,9 +1140,6 @@ input:checked + .slider:before {
     </div>
 
 
-
-    <!-- LOADING -->
-
     <div
         class="loading"
         id="loading"
@@ -1205,9 +1153,6 @@ input:checked + .slider:before {
 
     </div>
 
-
-
-    <!-- CONTROLS -->
 
     <div class="viewerControls">
 
@@ -1230,9 +1175,6 @@ input:checked + .slider:before {
     </div>
 
 
-
-    <!-- ================= HISTORY ================= -->
-
     <div
         class="historyPanel"
         id="history"
@@ -1249,14 +1191,10 @@ input:checked + .slider:before {
 
     </div>
 
-
 </section>
 
 </div>
 
-
-
-<!-- ================= THREE.JS ================= -->
 
 <script type="importmap">
 
@@ -1275,23 +1213,55 @@ input:checked + .slider:before {
 </script>
 
 
-
 <script type="module">
 
-import * as THREE
-from "https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js";
+import * as THREE from "three";
 
 import {
     OrbitControls
 }
-from "https://cdn.jsdelivr.net/npm/three@0.170.0/examples/jsm/controls/OrbitControls.js";
+from "three/addons/controls/OrbitControls.js";
 
 import {
     GLTFLoader
 }
-from "https://cdn.jsdelivr.net/npm/three@0.170.0/examples/jsm/loaders/GLTFLoader.js";
+from "three/addons/loaders/GLTFLoader.js";
 
 
+/* =====================================================
+   TRIPO CONFIGURATION
+===================================================== */
+
+/*
+   PUT YOUR NEW TRIPO API KEY BETWEEN THE QUOTES.
+
+   Example:
+
+   const TRIPO_API_KEY = "tsk_your_key_here";
+
+   Do NOT use the old key you previously posted.
+*/
+
+const TRIPO_API_KEY =
+    "tcli_81879442ad94429ea418c5400d93f712";
+
+
+const TRIPO_BASE =
+    "https://openapi.tripo3d.ai/v3";
+
+
+/*
+   P1 is currently recommended by Tripo
+   for low-poly / game / UGC assets.
+*/
+
+const TRIPO_MODEL =
+    "tripo-p1";
+
+
+/* =====================================================
+   VIEWER VARIABLES
+===================================================== */
 
 let scene;
 
@@ -1310,12 +1280,9 @@ let currentModelURL = null;
 let mode = "text";
 
 
-
-/* ==============================
-
-   THREE VIEWER
-
-================================ */
+/* =====================================================
+   THREE.JS VIEWER
+===================================================== */
 
 function initViewer() {
 
@@ -1372,6 +1339,11 @@ function initViewer() {
         THREE.SRGBColorSpace;
 
 
+    renderer.setAnimationLoop(
+        animate
+    );
+
+
     container.appendChild(
         renderer.domElement
     );
@@ -1389,16 +1361,15 @@ function initViewer() {
 
 
     controls.dampingFactor =
-        .06;
+        0.06;
 
 
     controls.minDistance =
-        .3;
+        0.3;
 
 
     controls.maxDistance =
         100;
-
 
 
     /* LIGHTING */
@@ -1443,7 +1414,6 @@ function initViewer() {
     scene.add(light2);
 
 
-
     /* GRID */
 
     grid =
@@ -1457,32 +1427,32 @@ function initViewer() {
     scene.add(grid);
 
 
-
     window.addEventListener(
         "resize",
         resizeViewer
     );
 
-
-    animate();
-
 }
 
 
-
-/* ==============================
-
+/* =====================================================
    ANIMATION
-
-================================ */
+===================================================== */
 
 function animate() {
 
-    requestAnimationFrame(
-        animate
-    );
+    if (!controls ||
+        !renderer ||
+        !scene ||
+        !camera) {
+
+        return;
+
+    }
+
 
     controls.update();
+
 
     renderer.render(
         scene,
@@ -1492,17 +1462,18 @@ function animate() {
 }
 
 
-
-/* ==============================
-
+/* =====================================================
    RESIZE
-
-================================ */
+===================================================== */
 
 function resizeViewer() {
 
     const container =
         document.getElementById("viewer");
+
+
+    if (!camera || !renderer)
+        return;
 
 
     camera.aspect =
@@ -1521,17 +1492,19 @@ function resizeViewer() {
 }
 
 
-
-/* ==============================
-
+/* =====================================================
    LOAD GLB
-
-================================ */
+===================================================== */
 
 window.loadGLB = function(url) {
 
     const loader =
         new GLTFLoader();
+
+
+    setStatus(
+        "Loading generated model..."
+    );
 
 
     loader.load(
@@ -1565,12 +1538,14 @@ window.loadGLB = function(url) {
 
             document
                 .getElementById("empty")
-                .style.display = "none";
+                .style.display =
+                "none";
 
 
             document
                 .getElementById("download")
-                .disabled = false;
+                .disabled =
+                false;
 
 
             currentModelURL =
@@ -1579,6 +1554,11 @@ window.loadGLB = function(url) {
 
             saveHistory(
                 url
+            );
+
+
+            setStatus(
+                "Model ready."
             );
 
         },
@@ -1594,6 +1574,7 @@ window.loadGLB = function(url) {
                         100
                     );
 
+
                 setStatus(
                     "Loading model " +
                     p +
@@ -1606,10 +1587,14 @@ window.loadGLB = function(url) {
 
         error => {
 
-            console.error(error);
+            console.error(
+                "GLB loading error:",
+                error
+            );
+
 
             setStatus(
-                "Unable to load the model."
+                "The model was generated, but Forge3D could not load the GLB."
             );
 
         }
@@ -1619,12 +1604,9 @@ window.loadGLB = function(url) {
 };
 
 
-
-/* ==============================
-
+/* =====================================================
    CENTER MODEL
-
-================================ */
+===================================================== */
 
 function centerModel(model) {
 
@@ -1659,12 +1641,15 @@ function centerModel(model) {
 
 
     const distance =
-        max * 2.4;
+        Math.max(
+            max * 2.4,
+            2
+        );
 
 
     camera.position.set(
         distance,
-        distance * .7,
+        distance * 0.7,
         distance
     );
 
@@ -1681,17 +1666,15 @@ function centerModel(model) {
 }
 
 
-
-/* ==============================
-
+/* =====================================================
    RESET CAMERA
-
-================================ */
+===================================================== */
 
 window.resetCamera = function() {
 
     if (!currentModel)
         return;
+
 
     centerModel(
         currentModel
@@ -1700,14 +1683,15 @@ window.resetCamera = function() {
 };
 
 
-
-/* ==============================
-
+/* =====================================================
    GRID
-
-================================ */
+===================================================== */
 
 window.toggleGrid = function() {
+
+    if (!grid)
+        return;
+
 
     grid.visible =
         !grid.visible;
@@ -1715,18 +1699,27 @@ window.toggleGrid = function() {
 };
 
 
-
-/* ==============================
-
+/* =====================================================
    DOWNLOAD
-
-================================ */
+===================================================== */
 
 window.downloadModel = function() {
 
-    if (!currentModelURL)
+    if (!currentModelURL) {
+
+        setStatus(
+            "No model available to download."
+        );
+
         return;
 
+    }
+
+
+    /*
+       Tripo's generated model URLs are temporary,
+       so download the model soon after generation.
+    */
 
     const a =
         document.createElement("a");
@@ -1738,6 +1731,10 @@ window.downloadModel = function() {
 
     a.target =
         "_blank";
+
+
+    a.rel =
+        "noopener";
 
 
     a.download =
@@ -1757,12 +1754,9 @@ window.downloadModel = function() {
 };
 
 
-
-/* ==============================
-
+/* =====================================================
    MODE
-
-================================ */
+===================================================== */
 
 window.setMode = function(newMode) {
 
@@ -1792,7 +1786,6 @@ window.setMode = function(newMode) {
         document.getElementById(
             "imageMode"
         );
-
 
 
     if (mode === "text") {
@@ -1837,15 +1830,15 @@ window.setMode = function(newMode) {
 
     }
 
+
+    setStatus("");
+
 };
 
 
-
-/* ==============================
-
+/* =====================================================
    IMAGE PREVIEW
-
-================================ */
+===================================================== */
 
 window.previewImage = function(event) {
 
@@ -1855,7 +1848,6 @@ window.previewImage = function(event) {
 
     if (!file)
         return;
-
 
 
     const allowedTypes = [
@@ -1889,15 +1881,18 @@ window.previewImage = function(event) {
     }
 
 
+    /*
+       Tripo supports up to 20 MB.
+    */
 
     const maxSize =
-        10 * 1024 * 1024;
+        20 * 1024 * 1024;
 
 
     if (file.size > maxSize) {
 
         setStatus(
-            "Image must be smaller than 10 MB."
+            "Image must be smaller than 20 MB."
         );
 
 
@@ -1908,7 +1903,6 @@ window.previewImage = function(event) {
         return;
 
     }
-
 
 
     const img =
@@ -1930,7 +1924,6 @@ window.previewImage = function(event) {
     }
 
 
-
     const url =
         URL.createObjectURL(
             file
@@ -1945,12 +1938,10 @@ window.previewImage = function(event) {
         url;
 
 
-
     document.getElementById(
         "imageName"
     ).textContent =
         file.name;
-
 
 
     document.getElementById(
@@ -1961,19 +1952,16 @@ window.previewImage = function(event) {
         );
 
 
-
     document.getElementById(
         "uploadBox"
     ).style.display =
         "none";
 
 
-
     document.getElementById(
         "imageSelected"
     ).style.display =
         "block";
-
 
 
     setStatus(
@@ -1983,19 +1971,15 @@ window.previewImage = function(event) {
 };
 
 
-
-/* ==============================
-
+/* =====================================================
    FILE SIZE
-
-================================ */
+===================================================== */
 
 function formatFileSize(bytes) {
 
     if (bytes < 1024) {
 
-        return bytes +
-            " B";
+        return bytes + " B";
 
     }
 
@@ -2019,19 +2003,15 @@ function formatFileSize(bytes) {
 }
 
 
-
-/* ==============================
-
+/* =====================================================
    REMOVE IMAGE
-
-================================ */
+===================================================== */
 
 window.removeImage = function(event) {
 
     event.preventDefault();
 
     event.stopPropagation();
-
 
 
     const input =
@@ -2044,7 +2024,6 @@ window.removeImage = function(event) {
         document.getElementById(
             "imagePreview"
         );
-
 
 
     if (img.dataset.objectURL) {
@@ -2060,14 +2039,12 @@ window.removeImage = function(event) {
     }
 
 
-
     input.value =
         "";
 
 
     img.src =
         "";
-
 
 
     document.getElementById(
@@ -2089,12 +2066,9 @@ window.removeImage = function(event) {
 };
 
 
-
-/* ==============================
-
+/* =====================================================
    PROMPT
-
-================================ */
+===================================================== */
 
 window.setPrompt = function(text) {
 
@@ -2106,164 +2080,69 @@ window.setPrompt = function(text) {
 };
 
 
+/* =====================================================
+   TRIPO API REQUEST
+===================================================== */
 
-/* ==============================
+async function tripoRequest(
+    url,
+    options
+) {
 
-   GENERATE
-
-================================ */
-
-window.generate = async function() {
-
-    const button =
-        document.getElementById(
-            "generateButton"
+    const response =
+        await fetch(
+            url,
+            options
         );
 
 
-
-    /* IMAGE MODE */
-
-    if (mode === "image") {
-
-        const imageFile =
-            document.getElementById(
-                "imageFile"
-            ).files[0];
+    let data;
 
 
-        if (!imageFile) {
+    try {
 
-            setStatus(
-                "Upload an image first."
-            );
+        data =
+            await response.json();
 
-            return;
+    }
 
-        }
+    catch {
 
-
-
-        button.disabled =
-            true;
-
-
-        document.getElementById(
-            "loading"
-        ).style.display =
-            "block";
-
-
-
-        setStatus(
-            "Image received. Preparing AI generation..."
+        throw new Error(
+            "Tripo returned an invalid response."
         );
-
-
-
-        let progress = 0;
-
-
-
-        const interval =
-            setInterval(() => {
-
-                progress += 10;
-
-
-                document.getElementById(
-                    "loadingText"
-                ).textContent =
-                    "Preparing image... " +
-                    progress +
-                    "%";
-
-
-
-                if (progress >= 100) {
-
-                    clearInterval(
-                        interval
-                    );
-
-
-                    document.getElementById(
-                        "loading"
-                    ).style.display =
-                        "none";
-
-
-                    button.disabled =
-                        false;
-
-
-                    setStatus(
-                        "Image uploaded successfully. Connect an AI 3D API to create the model."
-                    );
-
-                }
-
-            }, 120);
-
-
-
-        /*
-        
-        =========================================
-
-        REAL AI IMAGE-TO-3D CONNECTION GOES HERE
-
-        imageFile is the uploaded image.
-
-        Example:
-
-        const formData = new FormData();
-
-        formData.append(
-            "image",
-            imageFile
-        );
-
-        formData.append(
-            "quality",
-            document.getElementById("quality").value
-        );
-
-        formData.append(
-            "roblox",
-            document.getElementById("roblox").checked
-        );
-
-        const response = await fetch(
-            "YOUR_BACKEND_URL",
-            {
-                method: "POST",
-                body: formData
-            }
-        );
-
-        =========================================
-
-        */
-
-
-        return;
 
     }
 
 
+    if (
+        !response.ok ||
+        data.code !== 0
+    ) {
 
-    /* TEXT MODE */
+        const message =
+            data.message ||
+            data.suggestion ||
+            `Tripo API error ${response.status}`;
 
-    button.disabled =
-        true;
+
+        throw new Error(
+            message
+        );
+
+    }
 
 
-    document.getElementById(
-        "loading"
-    ).style.display =
-        "block";
+    return data;
 
+}
+
+
+/* =====================================================
+   CREATE TEXT TASK
+===================================================== */
+
+async function createTextTask() {
 
     let prompt =
         document.getElementById(
@@ -2295,7 +2174,6 @@ window.generate = async function() {
         ).value;
 
 
-
     if (!prompt) {
 
         prompt =
@@ -2304,108 +2182,631 @@ window.generate = async function() {
     }
 
 
+    /*
+       Add game-specific instructions.
+    */
 
     if (roblox) {
 
         prompt +=
-            ", optimized for Roblox, game-ready, efficient geometry";
+            ", optimized for Roblox, game-ready, efficient geometry, suitable for a Roblox game";
 
     }
-
 
 
     if (lowpoly) {
 
         prompt +=
-            ", low polygon geometry";
+            ", low polygon geometry, clean simple topology";
 
     }
 
 
+    const body = {
 
-    if (pbr) {
-
-        prompt +=
-            ", PBR materials";
-
-    }
-
-
-
-    console.log(
-        "Generation settings:",
-        {
+        prompt:
             prompt,
-            quality,
-            roblox,
-            lowpoly,
+
+        model:
+            TRIPO_MODEL,
+
+        texture:
+            true,
+
+        pbr:
             pbr
-        }
-    );
+
+    };
 
 
+    /*
+       Tripo texture quality values.
+    */
 
-    /* DEMO MODE */
+    if (quality === "Standard") {
+
+        body.texture_quality =
+            "standard";
+
+    }
+
+
+    if (quality === "High") {
+
+        body.texture_quality =
+            "detailed";
+
+    }
+
+
+    if (quality === "Ultra") {
+
+        body.texture_quality =
+            "extreme";
+
+    }
+
+
+    /*
+       Keep game assets reasonably light.
+       P1 supports face-count control.
+    */
+
+    if (roblox || lowpoly) {
+
+        body.face_limit =
+            lowpoly
+                ? 5000
+                : 10000;
+
+    }
+
 
     setStatus(
-        "Demo mode — AI API not connected yet."
+        "Sending prompt to Tripo..."
     );
 
 
+    document.getElementById(
+        "loadingText"
+    ).textContent =
+        "Starting Tripo generation...";
 
-    let progress = 0;
+
+    const data =
+        await tripoRequest(
+
+            `${TRIPO_BASE}/generation/text-to-model`,
+
+            {
+
+                method:
+                    "POST",
+
+                headers: {
+
+                    "Authorization":
+                        `Bearer ${TRIPO_API_KEY}`,
+
+                    "Content-Type":
+                        "application/json"
+
+                },
+
+                body:
+                    JSON.stringify(body)
+
+            }
+
+        );
 
 
+    return data.data.task_id;
 
-    const interval =
-        setInterval(() => {
+}
 
-            progress += 10;
+
+/* =====================================================
+   UPLOAD IMAGE TO TRIPO
+===================================================== */
+
+async function uploadImageToTripo(
+    file
+) {
+
+    setStatus(
+        "Uploading image to Tripo..."
+    );
+
+
+    document.getElementById(
+        "loadingText"
+    ).textContent =
+        "Uploading image...";
+
+
+    const formData =
+        new FormData();
+
+
+    formData.append(
+        "file",
+        file,
+        file.name
+    );
+
+
+    /*
+       Do NOT manually set Content-Type here.
+       Browser creates the multipart boundary.
+    */
+
+    const data =
+        await tripoRequest(
+
+            `${TRIPO_BASE}/files`,
+
+            {
+
+                method:
+                    "POST",
+
+                headers: {
+
+                    "Authorization":
+                        `Bearer ${TRIPO_API_KEY}`
+
+                },
+
+                body:
+                    formData
+
+            }
+
+        );
+
+
+    return data.data.file_token;
+
+}
+
+
+/* =====================================================
+   CREATE IMAGE TASK
+===================================================== */
+
+async function createImageTask(
+    fileToken
+) {
+
+    const roblox =
+        document.getElementById(
+            "roblox"
+        ).checked;
+
+
+    const lowpoly =
+        document.getElementById(
+            "lowpoly"
+        ).checked;
+
+
+    const pbr =
+        document.getElementById(
+            "pbr"
+        ).checked;
+
+
+    const quality =
+        document.getElementById(
+            "quality"
+        ).value;
+
+
+    const body = {
+
+        input:
+            fileToken,
+
+        model:
+            TRIPO_MODEL,
+
+        texture:
+            true,
+
+        pbr:
+            pbr,
+
+        enable_image_autofix:
+            true
+
+    };
+
+
+    if (quality === "Standard") {
+
+        body.texture_quality =
+            "standard";
+
+    }
+
+
+    if (quality === "High") {
+
+        body.texture_quality =
+            "detailed";
+
+    }
+
+
+    if (quality === "Ultra") {
+
+        body.texture_quality =
+            "extreme";
+
+    }
+
+
+    if (roblox || lowpoly) {
+
+        body.face_limit =
+            lowpoly
+                ? 5000
+                : 10000;
+
+    }
+
+
+    setStatus(
+        "Creating 3D model from image..."
+    );
+
+
+    document.getElementById(
+        "loadingText"
+    ).textContent =
+        "Creating 3D model...";
+
+
+    const data =
+        await tripoRequest(
+
+            `${TRIPO_BASE}/generation/image-to-model`,
+
+            {
+
+                method:
+                    "POST",
+
+                headers: {
+
+                    "Authorization":
+                        `Bearer ${TRIPO_API_KEY}`,
+
+                    "Content-Type":
+                        "application/json"
+
+                },
+
+                body:
+                    JSON.stringify(body)
+
+            }
+
+        );
+
+
+    return data.data.task_id;
+
+}
+
+
+/* =====================================================
+   POLL TRIPO TASK
+===================================================== */
+
+async function waitForTripoModel(
+    taskId
+) {
+
+    const maxAttempts =
+        300;
+
+
+    for (
+        let attempt = 0;
+        attempt < maxAttempts;
+        attempt++
+    ) {
+
+        await new Promise(
+            resolve =>
+                setTimeout(
+                    resolve,
+                    2000
+                )
+        );
+
+
+        const data =
+            await tripoRequest(
+
+                `${TRIPO_BASE}/tasks/${taskId}`,
+
+                {
+
+                    method:
+                        "GET",
+
+                    headers: {
+
+                        "Authorization":
+                            `Bearer ${TRIPO_API_KEY}`
+
+                    }
+
+                }
+
+            );
+
+
+        const task =
+            data.data;
+
+
+        const status =
+            task.status;
+
+
+        const progress =
+            Number(
+                task.progress || 0
+            );
+
+
+        if (status === "queued") {
+
+            setStatus(
+                "Tripo has queued your model..."
+            );
+
+            document.getElementById(
+                "loadingText"
+            ).textContent =
+                "Waiting in queue...";
+
+        }
+
+
+        if (status === "running") {
+
+            setStatus(
+                `Generating model... ${progress}%`
+            );
+
+            document.getElementById(
+                "loadingText"
+            ).textContent =
+                `Generating model... ${progress}%`;
+
+        }
+
+
+        if (status === "success") {
+
+            const modelURL =
+                task.output &&
+                task.output.model_url;
+
+
+            if (!modelURL) {
+
+                throw new Error(
+                    "Tripo finished, but no GLB model URL was returned."
+                );
+
+            }
+
+
+            setStatus(
+                "Model generated. Loading into Forge3D..."
+            );
 
 
             document.getElementById(
                 "loadingText"
             ).textContent =
-                "Preparing AI generation... " +
-                progress +
-                "%";
+                "Loading model...";
 
 
-
-            if (progress >= 100) {
-
-                clearInterval(
-                    interval
-                );
+            window.loadGLB(
+                modelURL
+            );
 
 
+            return;
+
+        }
+
+
+        if (
+            status === "failed" ||
+            status === "cancelled"
+        ) {
+
+            throw new Error(
+                task.message ||
+                "Tripo generation failed."
+            );
+
+        }
+
+    }
+
+
+    throw new Error(
+        "Generation took too long. Check your Tripo account/task."
+    );
+
+}
+
+
+/* =====================================================
+   GENERATE
+===================================================== */
+
+window.generate = async function() {
+
+    const button =
+        document.getElementById(
+            "generateButton"
+        );
+
+
+    const loading =
+        document.getElementById(
+            "loading"
+        );
+
+
+    const loadingText =
+        document.getElementById(
+            "loadingText"
+        );
+
+
+    /*
+       Check API key.
+    */
+
+    if (
+        !TRIPO_API_KEY ||
+        TRIPO_API_KEY.includes(
+            "PASTE_YOUR_NEW_TRIPO_KEY_HERE"
+        )
+    ) {
+
+        setStatus(
+            "Add your Tripo API key near the top of this file first."
+        );
+
+        return;
+
+    }
+
+
+    button.disabled =
+        true;
+
+
+    loading.style.display =
+        "block";
+
+
+    loadingText.textContent =
+        "Starting...";
+
+
+    try {
+
+        let taskId;
+
+
+        /* IMAGE MODE */
+
+        if (mode === "image") {
+
+            const imageFile =
                 document.getElementById(
-                    "loading"
-                ).style.display =
-                    "none";
+                    "imageFile"
+                ).files[0];
 
 
-                button.disabled =
-                    false;
+            if (!imageFile) {
 
-
-                setStatus(
-                    "Connect an AI 3D API to generate real models."
+                throw new Error(
+                    "Upload an image first."
                 );
 
             }
 
-        }, 150);
+
+            const fileToken =
+                await uploadImageToTripo(
+                    imageFile
+                );
+
+
+            taskId =
+                await createImageTask(
+                    fileToken
+                );
+
+        }
+
+
+        /* TEXT MODE */
+
+        else {
+
+            taskId =
+                await createTextTask();
+
+        }
+
+
+        setStatus(
+            "Tripo task created. Generating..."
+        );
+
+
+        await waitForTripoModel(
+            taskId
+        );
+
+
+    }
+
+    catch (error) {
+
+        console.error(
+            "Forge3D generation error:",
+            error
+        );
+
+
+        setStatus(
+            "Error: " +
+            error.message
+        );
+
+
+        loadingText.textContent =
+            "Generation failed.";
+
+    }
+
+    finally {
+
+        button.disabled =
+            false;
+
+
+        setTimeout(() => {
+
+            loading.style.display =
+                "none";
+
+        }, 1200);
+
+    }
 
 };
 
 
-
-/* ==============================
-
+/* =====================================================
    STATUS
-
-================================ */
+===================================================== */
 
 function setStatus(text) {
 
@@ -2417,12 +2818,9 @@ function setStatus(text) {
 }
 
 
-
-/* ==============================
-
+/* =====================================================
    HISTORY
-
-================================ */
+===================================================== */
 
 function saveHistory(url) {
 
@@ -2436,9 +2834,11 @@ function saveHistory(url) {
 
     history.unshift({
 
-        url: url,
+        url:
+            url,
 
-        date: Date.now()
+        date:
+            Date.now()
 
     });
 
@@ -2461,12 +2861,9 @@ function saveHistory(url) {
 }
 
 
-
-/* ==============================
-
-   RENDER HISTORY
-
-================================ */
+/* =====================================================
+   HISTORY RENDER
+===================================================== */
 
 function renderHistory() {
 
@@ -2487,6 +2884,24 @@ function renderHistory() {
     grid.innerHTML =
         "";
 
+
+    if (!history.length) {
+
+        grid.innerHTML = `
+
+            <div style="
+                color:#777d86;
+                font-size:13px;
+                padding:20px 0;
+            ">
+                No generated models yet.
+            </div>
+
+        `;
+
+        return;
+
+    }
 
 
     history.forEach(
@@ -2538,12 +2953,9 @@ function renderHistory() {
 }
 
 
-
-/* ==============================
-
+/* =====================================================
    NAVIGATION
-
-================================ */
+===================================================== */
 
 window.showModels = function() {
 
@@ -2572,7 +2984,6 @@ window.showModels = function() {
 };
 
 
-
 window.showGenerate = function() {
 
     document.getElementById(
@@ -2597,27 +3008,23 @@ window.showGenerate = function() {
 };
 
 
-
-/* ==============================
-
+/* =====================================================
    IMAGE FILE EVENT
-
-================================ */
+===================================================== */
 
 document
-    .getElementById("imageFile")
+    .getElementById(
+        "imageFile"
+    )
     .addEventListener(
         "change",
         previewImage
     );
 
 
-
-/* ==============================
-
+/* =====================================================
    START
-
-================================ */
+===================================================== */
 
 initViewer();
 
@@ -2626,5 +3033,5 @@ renderHistory();
 </script>
 
 </body>
+
 </html>
-```
