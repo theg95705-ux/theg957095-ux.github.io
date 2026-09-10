@@ -576,9 +576,15 @@ input:checked + .slider:before {
 <header>
 
     <div class="logo">
-        <div class="logoBox">3D</div>
+
+        <div class="logoBox">
+            3D
+        </div>
+
         Forge3D
+
     </div>
+
 
     <nav>
 
@@ -598,6 +604,7 @@ input:checked + .slider:before {
         </button>
 
     </nav>
+
 
     <div class="headerRight">
 
@@ -619,7 +626,10 @@ input:checked + .slider:before {
 
 <section class="sidebar">
 
-    <h1>Create 3D</h1>
+    <h1>
+        Create 3D
+    </h1>
+
 
     <div class="subtitle">
         Turn your ideas into interactive 3D models.
@@ -641,6 +651,7 @@ input:checked + .slider:before {
             ✨ Text to 3D
         </button>
 
+
         <button
             class="modeButton"
             id="imageMode"
@@ -658,10 +669,12 @@ input:checked + .slider:before {
             Describe your model
         </span>
 
+
         <textarea
             id="prompt"
             placeholder="Example: A military checkpoint with concrete barriers, sandbags, a guard tower and a small metal building..."
         ></textarea>
+
 
         <div class="quick">
 
@@ -669,13 +682,16 @@ input:checked + .slider:before {
                 🪖 Military
             </button>
 
+
             <button onclick="setPrompt('A rusty industrial warehouse with metal walls and large doors')">
                 🏭 Industrial
             </button>
 
+
             <button onclick="setPrompt('A small abandoned gas station with weathered signs')">
                 🏚 Building
             </button>
+
 
             <button onclick="setPrompt('A wooden watch tower with stairs and a small roof')">
                 🗼 Tower
@@ -698,6 +714,7 @@ input:checked + .slider:before {
             accept="image/png,image/jpeg,image/webp"
             hidden
         >
+
 
         <label
             class="upload"
@@ -730,6 +747,7 @@ input:checked + .slider:before {
                 alt="Image preview"
             >
 
+
             <div class="imageInfo">
 
                 <div id="imageName">
@@ -739,6 +757,7 @@ input:checked + .slider:before {
                 <div id="imageSize"></div>
 
             </div>
+
 
             <button
                 type="button"
@@ -761,11 +780,20 @@ input:checked + .slider:before {
                 Quality
             </span>
 
+
             <select id="quality">
 
-                <option>Standard</option>
-                <option>High</option>
-                <option>Ultra</option>
+                <option>
+                    Standard
+                </option>
+
+                <option>
+                    High
+                </option>
+
+                <option>
+                    Ultra
+                </option>
 
             </select>
 
@@ -777,6 +805,7 @@ input:checked + .slider:before {
             <span>
                 PBR Materials
             </span>
+
 
             <label class="switch">
 
@@ -799,6 +828,7 @@ input:checked + .slider:before {
                 Roblox / BRM5
             </span>
 
+
             <label class="switch">
 
                 <input
@@ -818,6 +848,7 @@ input:checked + .slider:before {
             <span>
                 Low Poly
             </span>
+
 
             <label class="switch">
 
@@ -874,9 +905,11 @@ input:checked + .slider:before {
             3D
         </div>
 
+
         <h2>
             Your model will appear here
         </h2>
+
 
         <p>
             Describe something and generate your first model.
@@ -892,6 +925,7 @@ input:checked + .slider:before {
 
         <div class="spinner"></div>
 
+
         <div id="loadingText">
             Creating model...
         </div>
@@ -905,9 +939,11 @@ input:checked + .slider:before {
             Reset View
         </button>
 
+
         <button onclick="toggleGrid()">
             Grid
         </button>
+
 
         <button
             id="download"
@@ -928,6 +964,7 @@ input:checked + .slider:before {
         <h2>
             My Models
         </h2>
+
 
         <div
             class="historyGrid"
@@ -972,35 +1009,36 @@ import {
 
 
 /* =====================================================
-   TRIPO CONFIG
+   FORGE3D BACKEND
 ===================================================== */
 
 /*
    IMPORTANT:
-   Put your NEW Tripo API key here.
 
-   Do NOT paste the key into ChatGPT.
+   The Tripo API key is NOT stored here.
 
-   Example:
+   Your browser talks to your Vercel backend:
 
-   const TRIPO_API_KEY = "tsk_xxxxxxxxx";
+       Forge3D
+          ↓
+       /api/tripo
+          ↓
+       Tripo API
+
+   The actual Tripo API key is stored safely
+   inside Vercel Environment Variables.
 */
 
-const TRIPO_API_KEY =
-    "tcli_81879442ad94429ea418c5400d93f712";
+const FORGE3D_API =
+    "/api/tripo";
 
 
 /*
-   Current Tripo API
-*/
-const TRIPO_BASE =
-    "https://api.tripo3d.ai/v2/openapi";
+   Tripo P1 model.
 
-
-/*
-   Current P1 model.
-   Good choice for Roblox / BRM5 / game assets.
+   Good choice for game / Roblox-style assets.
 */
+
 const TRIPO_MODEL =
     "P1-20260311";
 
@@ -1028,7 +1066,9 @@ let mode = "text";
 function initViewer() {
 
     const container =
-        document.getElementById("viewer");
+        document.getElementById(
+            "viewer"
+        );
 
 
     scene =
@@ -1036,7 +1076,9 @@ function initViewer() {
 
 
     scene.background =
-        new THREE.Color(0x0b0d10);
+        new THREE.Color(
+            0x0b0d10
+        );
 
 
     camera =
@@ -1100,11 +1142,14 @@ function initViewer() {
     controls.enableDamping =
         true;
 
+
     controls.dampingFactor =
         0.06;
 
+
     controls.minDistance =
         0.3;
+
 
     controls.maxDistance =
         100;
@@ -1117,7 +1162,10 @@ function initViewer() {
             2
         );
 
-    scene.add(hemi);
+
+    scene.add(
+        hemi
+    );
 
 
     const light =
@@ -1126,13 +1174,17 @@ function initViewer() {
             3
         );
 
+
     light.position.set(
         5,
         8,
         5
     );
 
-    scene.add(light);
+
+    scene.add(
+        light
+    );
 
 
     const light2 =
@@ -1141,13 +1193,17 @@ function initViewer() {
             1.5
         );
 
+
     light2.position.set(
         -5,
         4,
         -4
     );
 
-    scene.add(light2);
+
+    scene.add(
+        light2
+    );
 
 
     grid =
@@ -1158,7 +1214,10 @@ function initViewer() {
             0x202329
         );
 
-    scene.add(grid);
+
+    scene.add(
+        grid
+    );
 
 
     window.addEventListener(
@@ -1203,11 +1262,17 @@ function animate() {
 function resizeViewer() {
 
     const container =
-        document.getElementById("viewer");
+        document.getElementById(
+            "viewer"
+        );
 
 
-    if (!camera || !renderer)
+    if (
+        !camera ||
+        !renderer
+    ) {
         return;
+    }
 
 
     camera.aspect =
@@ -1271,13 +1336,17 @@ window.loadGLB = function(url) {
 
 
             document
-                .getElementById("empty")
+                .getElementById(
+                    "empty"
+                )
                 .style.display =
                 "none";
 
 
             document
-                .getElementById("download")
+                .getElementById(
+                    "download"
+                )
                 .disabled =
                 false;
 
@@ -1346,7 +1415,9 @@ function centerModel(model) {
 
     const box =
         new THREE.Box3()
-            .setFromObject(model);
+            .setFromObject(
+                model
+            );
 
 
     const center =
@@ -1451,7 +1522,9 @@ window.downloadModel = function() {
 
 
     const a =
-        document.createElement("a");
+        document.createElement(
+            "a"
+        );
 
 
     a.href =
@@ -1522,12 +1595,15 @@ window.setMode = function(newMode) {
         text.style.display =
             "block";
 
+
         image.style.display =
             "none";
+
 
         textButton.classList.add(
             "active"
         );
+
 
         imageButton.classList.remove(
             "active"
@@ -1540,12 +1616,15 @@ window.setMode = function(newMode) {
         text.style.display =
             "none";
 
+
         image.style.display =
             "block";
+
 
         textButton.classList.remove(
             "active"
         );
+
 
         imageButton.classList.add(
             "active"
@@ -1590,21 +1669,20 @@ window.previewImage = function(event) {
             "Please upload PNG, JPG or WebP."
         );
 
+
         event.target.value =
             "";
+
 
         return;
 
     }
 
 
-    /*
-       Tripo upload documentation currently
-       specifies a 10 MB upload limit.
-    */
-
     const maxSize =
-        10 * 1024 * 1024;
+        10 *
+        1024 *
+        1024;
 
 
     if (file.size > maxSize) {
@@ -1613,8 +1691,10 @@ window.previewImage = function(event) {
             "Image must be smaller than 10 MB."
         );
 
+
         event.target.value =
             "";
+
 
         return;
 
@@ -1627,7 +1707,9 @@ window.previewImage = function(event) {
         );
 
 
-    if (img.dataset.objectURL) {
+    if (
+        img.dataset.objectURL
+    ) {
 
         URL.revokeObjectURL(
             img.dataset.objectURL
@@ -1693,7 +1775,10 @@ function formatFileSize(bytes) {
         return bytes + " B";
 
 
-    if (bytes < 1024 * 1024) {
+    if (
+        bytes <
+        1024 * 1024
+    ) {
 
         return (
             bytes / 1024
@@ -1734,11 +1819,14 @@ window.removeImage = function(event) {
         );
 
 
-    if (img.dataset.objectURL) {
+    if (
+        img.dataset.objectURL
+    ) {
 
         URL.revokeObjectURL(
             img.dataset.objectURL
         );
+
 
         img.dataset.objectURL =
             "";
@@ -1788,7 +1876,7 @@ window.setPrompt = function(text) {
 
 
 /* =====================================================
-   TRIPO REQUEST
+   FORGE3D API REQUEST
 ===================================================== */
 
 async function tripoRequest(
@@ -1803,7 +1891,7 @@ async function tripoRequest(
 
         response =
             await fetch(
-                TRIPO_BASE + endpoint,
+                FORGE3D_API + endpoint,
                 options
             );
 
@@ -1811,8 +1899,14 @@ async function tripoRequest(
 
     catch (error) {
 
+        console.error(
+            "Backend connection error:",
+            error
+        );
+
+
         throw new Error(
-            "Could not connect to Tripo. This may be a browser CORS/API-key issue."
+            "Could not connect to the Forge3D backend."
         );
 
     }
@@ -1831,31 +1925,31 @@ async function tripoRequest(
     catch {
 
         throw new Error(
-            `Tripo returned HTTP ${response.status}, but no valid JSON response.`
+            `Backend returned HTTP ${response.status}, but no valid JSON response.`
         );
 
     }
 
 
     console.log(
-        "Tripo response:",
+        "Forge3D API response:",
         data
     );
 
 
     if (
         !response.ok ||
-        data.code !== 0
+        (
+            data.code !== undefined &&
+            data.code !== 0
+        )
     ) {
 
-        const message =
-            data.message ||
-            data.suggestion ||
-            `Tripo API error ${response.status}`;
-
-
         throw new Error(
-            message
+            data.message ||
+            data.error ||
+            data.suggestion ||
+            `API error ${response.status}`
         );
 
     }
@@ -1946,21 +2040,30 @@ async function createTextTask() {
     };
 
 
-    if (quality === "Standard") {
+    if (
+        quality ===
+        "Standard"
+    ) {
 
         body.texture_quality =
             "standard";
 
     }
 
-    else if (quality === "High") {
+    else if (
+        quality ===
+        "High"
+    ) {
 
         body.texture_quality =
             "detailed";
 
     }
 
-    else if (quality === "Ultra") {
+    else if (
+        quality ===
+        "Ultra"
+    ) {
 
         body.texture_quality =
             "extreme";
@@ -1968,7 +2071,10 @@ async function createTextTask() {
     }
 
 
-    if (roblox || lowpoly) {
+    if (
+        roblox ||
+        lowpoly
+    ) {
 
         body.face_limit =
             lowpoly
@@ -1991,30 +2097,40 @@ async function createTextTask() {
 
     const data =
         await tripoRequest(
-
-            "/task",
-
+            "",
             {
-
                 method:
                     "POST",
 
                 headers: {
-
-                    "Authorization":
-                        `Bearer ${TRIPO_API_KEY}`,
-
                     "Content-Type":
                         "application/json"
-
                 },
 
                 body:
-                    JSON.stringify(body)
-
+                    JSON.stringify(
+                        body
+                    )
             }
-
         );
+
+
+    if (
+        !data.data ||
+        !data.data.task_id
+    ) {
+
+        console.error(
+            "Task creation response:",
+            data
+        );
+
+
+        throw new Error(
+            "Tripo did not return a task ID."
+        );
+
+    }
 
 
     return data.data.task_id;
@@ -2052,33 +2168,16 @@ async function uploadImageToTripo(file) {
 
     const data =
         await tripoRequest(
-
-            "/upload/sts",
-
+            "",
             {
-
                 method:
                     "POST",
 
-                headers: {
-
-                    "Authorization":
-                        `Bearer ${TRIPO_API_KEY}`
-
-                },
-
                 body:
                     formData
-
             }
-
         );
 
-
-    /*
-       Current Tripo upload response
-       returns image_token.
-    */
 
     const imageToken =
         data.data &&
@@ -2145,14 +2244,32 @@ async function createImageTask(
         fileType;
 
 
-    if (type === "image/jpeg")
+    if (
+        type ===
+        "image/jpeg"
+    ) {
+
         type = "jpg";
 
-    else if (type === "image/png")
+    }
+
+    else if (
+        type ===
+        "image/png"
+    ) {
+
         type = "png";
 
-    else if (type === "image/webp")
+    }
+
+    else if (
+        type ===
+        "image/webp"
+    ) {
+
         type = "webp";
+
+    }
 
 
     const body = {
@@ -2182,21 +2299,30 @@ async function createImageTask(
     };
 
 
-    if (quality === "Standard") {
+    if (
+        quality ===
+        "Standard"
+    ) {
 
         body.texture_quality =
             "standard";
 
     }
 
-    else if (quality === "High") {
+    else if (
+        quality ===
+        "High"
+    ) {
 
         body.texture_quality =
             "detailed";
 
     }
 
-    else if (quality === "Ultra") {
+    else if (
+        quality ===
+        "Ultra"
+    ) {
 
         body.texture_quality =
             "extreme";
@@ -2204,7 +2330,10 @@ async function createImageTask(
     }
 
 
-    if (roblox || lowpoly) {
+    if (
+        roblox ||
+        lowpoly
+    ) {
 
         body.face_limit =
             lowpoly
@@ -2227,30 +2356,40 @@ async function createImageTask(
 
     const data =
         await tripoRequest(
-
-            "/task",
-
+            "",
             {
-
                 method:
                     "POST",
 
                 headers: {
-
-                    "Authorization":
-                        `Bearer ${TRIPO_API_KEY}`,
-
                     "Content-Type":
                         "application/json"
-
                 },
 
                 body:
-                    JSON.stringify(body)
-
+                    JSON.stringify(
+                        body
+                    )
             }
-
         );
+
+
+    if (
+        !data.data ||
+        !data.data.task_id
+    ) {
+
+        console.error(
+            "Image task response:",
+            data
+        );
+
+
+        throw new Error(
+            "Tripo did not return a task ID."
+        );
+
+    }
 
 
     return data.data.task_id;
@@ -2262,26 +2401,18 @@ async function createImageTask(
    GET TASK
 ===================================================== */
 
-async function getTripoTask(taskId) {
+async function getTripoTask(
+    taskId
+) {
 
     return await tripoRequest(
-
-        `/task/${taskId}`,
-
+        `?task_id=${encodeURIComponent(
+            taskId
+        )}`,
         {
-
             method:
-                "GET",
-
-            headers: {
-
-                "Authorization":
-                    `Bearer ${TRIPO_API_KEY}`
-
-            }
-
+                "GET"
         }
-
     );
 
 }
@@ -2291,7 +2422,9 @@ async function getTripoTask(taskId) {
    POLL TASK
 ===================================================== */
 
-async function waitForTripoModel(taskId) {
+async function waitForTripoModel(
+    taskId
+) {
 
     const maxAttempts =
         300;
@@ -2322,6 +2455,15 @@ async function waitForTripoModel(taskId) {
             data.data;
 
 
+        if (!task) {
+
+            throw new Error(
+                "Tripo returned an invalid task response."
+            );
+
+        }
+
+
         console.log(
             "Task:",
             task
@@ -2338,7 +2480,10 @@ async function waitForTripoModel(taskId) {
             );
 
 
-        if (status === "queued") {
+        if (
+            status ===
+            "queued"
+        ) {
 
             setStatus(
                 "Tripo has queued your model..."
@@ -2353,7 +2498,10 @@ async function waitForTripoModel(taskId) {
         }
 
 
-        else if (status === "running") {
+        else if (
+            status ===
+            "running"
+        ) {
 
             setStatus(
                 `Generating model... ${progress}%`
@@ -2368,18 +2516,21 @@ async function waitForTripoModel(taskId) {
         }
 
 
-        else if (status === "success") {
-
-            /*
-               Tripo's output can contain
-               different model file fields.
-
-               Check all common GLB locations.
-            */
+        else if (
+            status ===
+            "success"
+        ) {
 
             const output =
-                task.output || {};
+                task.output ||
+                {};
 
+
+            /*
+               Tripo can return different
+               output fields depending on
+               the generation configuration.
+            */
 
             const modelURL =
                 output.model ||
@@ -2425,7 +2576,10 @@ async function waitForTripoModel(taskId) {
         }
 
 
-        else if (status === "failed") {
+        else if (
+            status ===
+            "failed"
+        ) {
 
             throw new Error(
                 task.message ||
@@ -2436,7 +2590,10 @@ async function waitForTripoModel(taskId) {
         }
 
 
-        else if (status === "banned") {
+        else if (
+            status ===
+            "banned"
+        ) {
 
             throw new Error(
                 "Tripo blocked this generation."
@@ -2458,7 +2615,8 @@ async function waitForTripoModel(taskId) {
    GENERATE
 ===================================================== */
 
-window.generate = async function() {
+window.generate =
+    async function() {
 
     const button =
         document.getElementById(
@@ -2478,22 +2636,6 @@ window.generate = async function() {
         );
 
 
-    if (
-        !TRIPO_API_KEY ||
-        TRIPO_API_KEY.includes(
-            "PASTE_YOUR_NEW_TRIPO_KEY_HERE"
-        )
-    ) {
-
-        setStatus(
-            "Add your new Tripo API key near the top of this file."
-        );
-
-        return;
-
-    }
-
-
     button.disabled =
         true;
 
@@ -2511,9 +2653,14 @@ window.generate = async function() {
         let taskId;
 
 
-        /* IMAGE */
+        /* -------------------------
+           IMAGE TO 3D
+        ------------------------- */
 
-        if (mode === "image") {
+        if (
+            mode ===
+            "image"
+        ) {
 
             const imageFile =
                 document.getElementById(
@@ -2545,7 +2692,9 @@ window.generate = async function() {
         }
 
 
-        /* TEXT */
+        /* -------------------------
+           TEXT TO 3D
+        ------------------------- */
 
         else {
 
@@ -2593,12 +2742,15 @@ window.generate = async function() {
             false;
 
 
-        setTimeout(() => {
+        setTimeout(
+            () => {
 
-            loading.style.display =
-                "none";
+                loading.style.display =
+                    "none";
 
-        }, 1200);
+            },
+            1200
+        );
 
     }
 
@@ -2629,7 +2781,8 @@ function saveHistory(url) {
         JSON.parse(
             localStorage.getItem(
                 "forge3d-history"
-            ) || "[]"
+            ) ||
+            "[]"
         );
 
 
@@ -2653,7 +2806,9 @@ function saveHistory(url) {
 
     localStorage.setItem(
         "forge3d-history",
-        JSON.stringify(history)
+        JSON.stringify(
+            history
+        )
     );
 
 
@@ -2663,7 +2818,7 @@ function saveHistory(url) {
 
 
 /* =====================================================
-   HISTORY
+   RENDER HISTORY
 ===================================================== */
 
 function renderHistory() {
@@ -2678,7 +2833,8 @@ function renderHistory() {
         JSON.parse(
             localStorage.getItem(
                 "forge3d-history"
-            ) || "[]"
+            ) ||
+            "[]"
         );
 
 
@@ -2686,7 +2842,9 @@ function renderHistory() {
         "";
 
 
-    if (!history.length) {
+    if (
+        !history.length
+    ) {
 
         grid.innerHTML = `
 
@@ -2699,6 +2857,7 @@ function renderHistory() {
             </div>
 
         `;
+
 
         return;
 
@@ -2758,7 +2917,8 @@ function renderHistory() {
    NAVIGATION
 ===================================================== */
 
-window.showModels = function() {
+window.showModels =
+    function() {
 
     document.getElementById(
         "history"
@@ -2785,7 +2945,8 @@ window.showModels = function() {
 };
 
 
-window.showGenerate = function() {
+window.showGenerate =
+    function() {
 
     document.getElementById(
         "history"
